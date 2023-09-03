@@ -30,11 +30,29 @@
 (define (abs x) (if (< x 0) (* x -1) x))
 
 ;7
+;(define (increase-all-one lst)
+;  (cond [(empty? lst) empty]
+;        [else (cons (+ (first lst) 1)
+;                   (increase-all-one (rest lst)))]))
 (define (increase-all-one lst)
-  (cond [(empty? lst) empty]
-        [else (cons (+ (first lst) 1)
-                    (increase-all-one (rest lst)))]))
+  (map (lambda (number) (+ 1 number)) lst))
 
+;8
+(define (even? x)
+  (define (mod a b)
+    (if (< a b)
+      a
+      (mod (- a b) b)))
+  (if (equal? (mod x 2) 0)
+      #t
+      #f))
+
+;9
+(define (another-add x y)
+  (lambda (n m)
+    (cond
+      [(zero? n) n]
+      [else (add1 (another-add n (sub1 m)))])))
 
 
   
