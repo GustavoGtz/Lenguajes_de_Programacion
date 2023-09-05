@@ -34,8 +34,10 @@
 ;  (cond [(empty? lst) empty]
 ;        [else (cons (+ (first lst) 1)
 ;                   (increase-all-one (rest lst)))]))
-(define (increase-all-one lst)
-  (map (lambda (number) (+ 1 number)) lst))
+;(define (increase-all-one lst)
+  ;(map (lambda (number) (+ 1 number)) lst))
+(define lst '(1 2 3))
+(map (lambda (number ) (+ 1 number)) lst)
 
 ;8
 (define (even? x)
@@ -48,11 +50,11 @@
       #f))
 
 ;9
-(define (another-add x y)
+(define another-add
   (lambda (n m)
     (cond
-      [(zero? n) n]
-      [else (add1 (another-add n (sub1 m)))])))
+      [(zero? n) m]
+      [else (add1 (another-add m (sub1 n)))])))
 
 
   
