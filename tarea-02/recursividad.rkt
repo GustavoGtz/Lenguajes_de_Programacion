@@ -98,6 +98,7 @@
          [else #f]))]))
 
 ;12
+(equal? '((w x) y (z)) '((w . (x . ())) y (z . ())))
 
 
 ;13 blst = binary list
@@ -121,7 +122,6 @@
 (define (append-map func lst)
   (cond
     [(empty? lst) empty]
-    [else )
-; FALTA AGREGAR VARIOS CASOS (QUE PASA SI EL ELEMENTO ES UNA LISTA O UN SOLO ELEMENTO, ETC).
-;(append (func (first lst)) (append-map func (rest lst)))])
+    [else (append (func (first lst)) (append-map func (rest lst)))]))
+
 
