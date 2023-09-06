@@ -100,28 +100,10 @@
 ;12
 
 
-;13 blst = binary list
-(define (binary->natural blst)
-  (cond
-    [(empty? blst) 0]
-    [else
-     (cond
-       [(eqv? (first blst) 1) (+ 1 (binary->natural (rest blst)) (binary->natural (rest blst)))]
-       [else (+ 0 (binary->natural (rest blst)) (binary->natural (rest blst)))])]))
-
-
 ;14 num = numerator, den = denominator
 (define (div num den)
   (cond
     [(eqv? num 0) 0]
-    [(< num 0) -666]
+    [(< num 0) (write 'error)]
     [else (+ 1 (div (- num den) den))]))
-
-;15
-(define (append-map func lst)
-  (cond
-    [(empty? lst) empty]
-    [else )
-; FALTA AGREGAR VARIOS CASOS (QUE PASA SI EL ELEMENTO ES UNA LISTA O UN SOLO ELEMENTO, ETC).
-;(append (func (first lst)) (append-map func (rest lst)))])
 
