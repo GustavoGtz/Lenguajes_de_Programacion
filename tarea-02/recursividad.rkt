@@ -118,10 +118,29 @@
     [(< num 0) -666]
     [else (+ 1 (div (- num den) den))]))
 
-;15
+;15 flst = first list, slst = second list
 (define (append-map func lst)
   (cond
     [(empty? lst) empty]
     [else (append (func (first lst)) (append-map func (rest lst)))]))
+
+;16
+(define (set-difference flst slst)
+  (cond
+    [(empty? flst) empty]
+    [else
+     (let ([x (first flst)])
+       (cond
+         [(eqv? -1 (list-index-ofv x slst)) (cons x (set-difference (rest flst) slst))]
+         [else (set-difference (rest flst) slst)]))]))
+         
+
+;17 func must be a binary operation, acumulator must be compatible with the function and the list
+(define (foldr func acumulator lst)
+  (cond
+    [(empty? lst) acumulator]
+    [else (func (first lst) (foldr func acumulator (rest lst)))]))
+
+;18
 
 
