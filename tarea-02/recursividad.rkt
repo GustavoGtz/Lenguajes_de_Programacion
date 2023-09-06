@@ -82,4 +82,28 @@
     [(eqv? 0 n) empty]
     [else (append lst (repeat lst (sub1 n)))]))
 
-;11
+;11 flst = first list, slst = second list
+(define (same-lists* flst slst)
+  (cond
+    [(and (empty? flst) (empty? slst)) #t]
+    [(or (empty? flst) (empty? slst)) #f]
+    [else
+     (let ([x (first flst)]
+           [y (first slst)])
+       (cond
+         [(and (list? x) (list? y)) (cond
+                                      [(same-lists* x y) (same-lists* (rest flst) (rest slst))]
+                                      [else #f])]
+         [(eqv? x y) (same-lists* (rest flst) (rest slst))]
+         [else #f]))]))
+
+;12
+
+
+;14 num = numerator, den = denominator
+(define (div num den)
+  (cond
+    [(eqv? num 0) 0]
+    [(< num 0) (write 'error)]
+    [else (+ 1 (div (- num den) den))]))
+
