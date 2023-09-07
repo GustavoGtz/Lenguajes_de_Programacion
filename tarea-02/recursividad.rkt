@@ -143,4 +143,16 @@
 
 ;18
 
+(define (powerset lst)
+  (if (empty? lst)
+      '(())
+      (let ([e (first lst)]
+            [t (rest lst)])
+        (append (for/list ([i (powerset t)]) (append (list e) i)) (powerset t)))))
+  
+
+
+       
+       
+
 
