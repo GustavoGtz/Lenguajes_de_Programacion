@@ -142,13 +142,19 @@
     [else (func (first lst) (foldr func acumulator (rest lst)))]))
 
 ;18
-
 (define (powerset lst)
   (if (empty? lst)
       '(())
       (let ([e (first lst)]
             [t (rest lst)])
         (append (for/list ([i (powerset t)]) (append (list e) i)) (powerset t)))))
+
+;19 lst must be a list of list of numbers
+(define (cartesian-product lst)
+  (if (empty? (first lst))
+      empty
+      (let ([i (first (first lst))])
+        (append (map (lambda (j) (list i j)) (second lst)) (cartesian-product (list (rest (first lst)) (second lst)))))))
   
 
 
