@@ -105,11 +105,7 @@
 (define (binary->natural blst)
   (cond
     [(empty? blst) 0]
-    [else
-     (cond
-       [(eqv? (first blst) 1) (+ 1 (binary->natural (rest blst)) (binary->natural (rest blst)))]
-       [else (+ 0 (binary->natural (rest blst)) (binary->natural (rest blst)))])]))
-
+    [else (+ (if (eqv? (first blst) 1) 1 0) (binary->natural (rest blst)) (binary->natural (rest blst)))]))
 
 ;14 num = numerator, den = denominator
 (define (div num den)
@@ -155,6 +151,60 @@
       empty
       (let ([i (first (first lst))])
         (append (map (lambda (j) (list i j)) (second lst)) (cartesian-product (list (rest (first lst)) (second lst)))))))
+
+;20
+
+;20.1
+(define (insertL-fr x y lst)
+  (foldr (lambda (a b) (if (eqv? a x) (cons y (cons x b)) (cons a b))) empty lst))
+
+;20.2
+(define (filter-fr f lst)
+  (foldr (lambda (a b) (if (f a) (cons a b) b)) empty lst))
+
+;20.3
+(define (map-fr f lst)
+  (foldr (lambda (a b) (cons (f a) b)) empty lst))
+
+;20.4
+(define (append-fr flst slst)
+  (foldr (lambda (a b) (cons a b)) flst slst))
+
+;20.5
+(define (reverse-fr lst)
+  (foldr (lambda (a b) (cons b a)) empty lst))
+
+;20.6
+
+;21
+(define snowball
+  (letrec
+      ((odd-case
+        (lambda (fix-odd)
+          (lambda (x)
+            (cond
+              ((and (exact-integer? x) (positive? x) (odd? x) (snowball (add1 (* x 3)))))
+               (else (fix-odd x))))))
+        (even-case
+         (lambda (fix-even)
+           (lambda (x)
+             (cond
+               ((and (exact-integer? x) (positive? x) (even? x)) (snowball (/ x 2)))
+               (else (fix-even x))))))
+        (one-case
+         (lambda (fix-one)
+           (lambda (x)
+             (cond
+               ((zero? (sub1 x)) 1)
+               (else (fix-one x))))))
+        (base
+         (lambda (x)
+           (error 'error "Invalid value s n" x))))
+    (one-case (even-case (odd-case base)))))
+
+      
+    
+          
   
 
 
