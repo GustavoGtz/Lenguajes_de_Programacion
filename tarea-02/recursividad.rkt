@@ -175,7 +175,19 @@
   (foldr (lambda (a b) (cons b a)) empty lst))
 
 ;20.6
+(define (binary->natural-fr lst)
+  (foldr (lambda (a b) (+ a (* 2 b))) 0 lst))
 
+;20.7
+(define (append-map-fr f lst)
+  (foldr (lambda (a b) (cons (f a) b)) empty lst))
+
+;20.8
+(define (set-difference-fr flst slst)
+  (foldr (lambda (a b) (if (eqv? -1 (list-index-ofv a slst)) (cons a b) b)) empty flst))
+
+;20.9
+  
 ;21
 (define snowball
   (letrec
