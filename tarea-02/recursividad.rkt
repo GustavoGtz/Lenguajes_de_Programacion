@@ -187,7 +187,9 @@
   (foldr (lambda (a b) (if (eqv? -1 (list-index-ofv a slst)) (cons a b) b)) empty flst))
 
 ;20.9
-  
+(define (powerset-fr lst)
+  (foldr (lambda (a b) (append-map (lambda (i) (list (cons a i) i)) b)) (list (list)) lst))
+
 ;21
 (define snowball
   (letrec
@@ -214,9 +216,12 @@
            (error 'error "Invalid value s n" x))))
     (one-case (even-case (odd-case base)))))
 
-      
-    
-          
+;22
+
+(define quine "Dijo el gato con los pies de trapo y los ojos alrevez")
+
+
+
   
 
 
