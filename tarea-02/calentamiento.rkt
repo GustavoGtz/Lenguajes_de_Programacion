@@ -34,10 +34,10 @@
 ;  (cond [(empty? lst) empty]
 ;        [else (cons (+ (first lst) 1)
 ;                   (increase-all-one (rest lst)))]))
-;(define (increase-all-one lst)
-  ;(map (lambda (number) (+ 1 number)) lst))
-(define lst '(1 2 3))
-(map (lambda (number ) (+ 1 number)) lst)
+(define (inclis1 lst)
+  (map (lambda (number) (+ 1 number)) lst))
+;(define lst '(1 2 3))
+;(map (lambda (number ) (+ 1 number)) lst)
 
 ;8
 (define (even? x)
