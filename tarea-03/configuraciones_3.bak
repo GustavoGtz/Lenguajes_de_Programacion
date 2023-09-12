@@ -1,4 +1,3 @@
-; #Tercera configuración
 #lang stacker/smol/hof
 
 (deffun (f z) (lambda (w) (+ w z)))
