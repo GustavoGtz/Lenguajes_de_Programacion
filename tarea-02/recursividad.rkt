@@ -168,7 +168,7 @@
 
 ;20.4
 (define (append-fr flst slst)
-  (foldr (lambda (a b) (cons a b)) flst slst))
+  (foldr (lambda (a b) (cons a b)) slst flst))
 
 ;20.5
 (define (reverse-fr lst)

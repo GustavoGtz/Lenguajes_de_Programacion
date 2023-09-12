@@ -1,0 +1,3 @@
+Razonamiento:
+El punto clave en la realización de este código ocurrió cuando me percate que al crear vectores los cuales tuvieran como elementos a su vez otros vectores, producia una creación de vectores en el stack, de tal forma que podia acomodar el orden de estos para que se ajustaran a mis necesidades, apartir de esto fue como surgio la solución.
+
