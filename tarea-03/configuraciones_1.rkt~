@@ -9,5 +9,4 @@
 (vec-set! (vec-ref v0 0) 0 (vec-ref v0 1))
 (vec-set! (vec-ref v0 1) 0 (vec-ref v0 0))
 
-v0
 (pause)
