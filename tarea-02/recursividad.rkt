@@ -172,7 +172,7 @@
 
 ;20.5
 (define (reverse-fr lst)
-  (foldr (lambda (a b) (cons a b)) empty lst))
+  (foldr (lambda (a b) (append b (list a)))  empty lst))
 
 ;20.6
 (define (binary->natural-fr lst)

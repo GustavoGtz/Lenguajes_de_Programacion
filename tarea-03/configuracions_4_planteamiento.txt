@@ -1,2 +1,0 @@
-Razonamiento:
-El problema se pudo resolver cuando me plantee la idea de que el programa tenia que ser una especie de contador, por lo tanto busque alguna forma de implementación y encontré que en la propia tarea, en la ultima sección se encontraba lo que estaba buscando (el uso del let con funciones lambda).
