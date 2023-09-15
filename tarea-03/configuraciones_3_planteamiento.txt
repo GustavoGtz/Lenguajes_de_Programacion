@@ -1,2 +1,0 @@
-Razonamiento:
-El momento en el que pude hacer la tarea, fue en el momento que me di cuenta, que dentro de las funciones lambadas manejan su propio entorno para definir variables, al igual que si fueran una función.
