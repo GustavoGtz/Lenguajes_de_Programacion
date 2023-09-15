@@ -1,0 +1,81 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+
+\begin{document}
+% -----------------------PORTADA-------------------------------------------
+\begin{titlepage}
+	\centering
+	\includegraphics[width=0.5\textwidth]{unisonlogo(1).jpg}\par\vspace{1cm}
+	{\scshape\LARGE Universidad de Sonora\par}
+	\vspace{1cm}
+	{\scshape\Large Tarea 3: Implementación de objetos en Racket\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Lenguajes de Programación\par}
+	\vspace{2cm}
+	{\Large\itshape Gutierrez Navarro Gustavo\par}
+	\vfill
+	\vfill
+	{\large \today\par}
+\end{titlepage}
+% -------------------------------------------------------------------------
+\section{Razonamientos de las configuraciones}
+\begin{itemize}
+    \item \textbf{Primera configuración:}
+    El punto mas importante durante la elaboración de este ejercicio, ocurrio cuando me percate que al crear vectores cuyos elementos fueran otros vectores, la creación de estos se daban desde dentro hacia afuera, es decir primero los vectores internos y luego los externos. Esta idea fue la idea que me permitio solucionar el problema.
+
+    \item \textbf{Segunda configuración:}
+    La pieza fundamental para elaborar este programa fue el uso de $letrec$ y adicionalmnete, ajustando la creación de entornos para que se ajustara correctamente a la configuración.
+
+    \item \textbf{Tercera configuración:}
+    Despues de un tiempo intentando recrear la configuración, me percaté que las funciones lambda manejan su propio entorno de variables, esta característica me permitio completar mi programa.
+
+    \item \textbf{Cuarta configuración:}
+    Desde que empeze a resolver este ejercicio, me pude percatar que muy probablemente el programa se trataba de un contador. Esta idea la segui desarrollando, encontrandome con varios problemas los cuales puede resolver investigando en las notas de clase, y en especial con el segundo ejemplo de la implementación de objetos en racket de la propia tarea 3. 
+\end{itemize}
+
+\section{Sección de objetos}
+\begin{itemize}
+    \item \textbf{Objetos básicos:}
+    \begin{enumerate}
+        \item Describe qué hace el programa.
+        El programa se encarga de inicializar una variable $init$ para posteriormente, tener la posibilidad de incrementar en 1 su valor u obtener el valor actual de la variable. Estas operaciones se dan mediante las palabras claves "inc" y "get que son pasadas como parametros.
+        \item ¿Qué $clases$ hemos codificado?
+        La clase se llama $o-state-2$ y podria ser clasificado como un contador.
+        \item ¿Qué $objetos$ hemos codificado?
+        El único objeto que hemos codificado es $o$ una instancia de la clase anteriormente nombrada.
+        \item ¿Qué $atributos$ hemos codificado?
+        Nuestra clase tiene un solo atributo llamado $init$ el cual podriamos decir que es de tipo entero y se inicializa en el constructor.
+        \item ¿Qué $metodos$ hemos codificado?
+        Tenemos en si un solo método el cual va actuar diferente dependiendo del parametro que le pasemos, sin embargo si lo interpretamos como un objeto, podemos ver que tenemos dos métodos, $inc$ y $get$, el primero se encarga de incrementar el atributo $init$ en 1 y el segundo nos devuelve su valor actual.
+        \item Describe cómo se implementaron las $clases$.
+        La clase se implemento mediante el uso de una función que devuelve una función lambda la cual hace uso de la variable $init$ para asemejar a cuando una clase crea una instancia con varios parametros.
+        \item Describe cómo se implementaron los $objetos$.
+        Los objetos estan presentes cuando definimos una variable y le asignamos de valor la llamada a la función (la clase), esto permite que cada una de las variables que creemos tenga su propio entorno distinto al resto, permitiendo que exitsta el encapsulamiento.
+        \item Describe cómo se implementaron los $atributos$.
+        El único atributo que se implemento $init$, dicho valor se puede inicializar con la primera llamada a la función ya que es la encargada de iniciar el entrono donde va a trabajar el objeto creado.
+        \item Describe cómo se implementaron los $metodos$.
+        Los metodos se implementarón mediante la función lambda, que utiliza su único parametro $m$ para pasarle el nombre del metodo que se quiera usar, de esta manera podemos escribir cuantos metodos queramos a manera de un switch case dentro de la función lambda.
+    \end{enumerate}
+
+    \item \textbf{Atributos estáticos:}
+    \begin{enumerate}
+        \item Describe qué hace el programa.
+        Este programa funciona un poco distinto al anterior. Este programa maneja dos variables importantes, un contador que maneja el número de veces que la clase ha sido crada (en otras palabras cuantas instancias del objeto han sido creadas) y otra que se inicializa en un número y que tiene un método para incrementar su valor en 1. La primera variable, el contador funciona de manera global y compartida entre todas las estancias de la clase mientras que el acumulador es individual para cada objeto.
+        \item ¿Cuántos objetos son creados?
+        2 objetos son creados $o-1$ y $o-2$.
+        \item ¿Cuál es el valor del amount de o-1 al final de la ejecución del programa?
+        5.
+        \item ¿Cuál es el valor del amount de o-2 al final de la ejecución del programa?
+        8.
+        \item ¿Cuál es el valor del counter de o-1 al final de la ejecución del programa?
+        2.
+        \item ¿Cuál es el valor del counter de o-2 al final de la ejecución del programa?
+        2.
+        
+    \end{enumerate}
+    
+\end{itemize}
+
+
+\end{document}
