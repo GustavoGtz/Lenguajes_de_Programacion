@@ -12,7 +12,8 @@
 
 (define identifier-regex #px"[xyz][xyz[:digit:]]*")
 
-(define number-regex #px"[\\+-]?[:digit:]+")
+(define number-regex #px"[\\+-]?[[:digit:]]+")
+
 
 (provide open-paren-regex
          close-paren-regex
