@@ -1,18 +1,18 @@
 #lang racket
 
-(define open-paren-regex ...)
+(define open-paren-regex #px"\\(")
 
-(define close-paren-regex ...)
+(define close-paren-regex #px"\\)")
 
-(define define-regex ...)
+(define define-regex #px"define")
 
-(define sum-regex ...)
+(define sum-regex #px"\\+")
 
-(define mult-regex ...)
+(define mult-regex #px"\\*")
 
-(define identifier-regex ...)
+(define identifier-regex #px"[xyz][xyz[:digit:]]*")
 
-(define number-regex ...)
+(define number-regex #px"[\\+-]?[:digit:]+")
 
 (provide open-paren-regex
          close-paren-regex

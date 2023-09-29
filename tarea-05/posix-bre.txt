@@ -1,7 +1,7 @@
-open-paren=
-close-paren=
-define=
-sum=
-mult=
-identifier=
-number=
+open-paren=(
+close-paren=)
+define=define
+sum=+
+mult=\*
+identifier=[xyz][xyz[:digit:]]*
+number=[+-]*\{0,1\}[[:digit:]]*\{1,\}
