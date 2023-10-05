@@ -46,17 +46,17 @@
 (define (token-number value col)
   (token 'number value lex-line col))
 
-(define (token-number/+ t)
+(define (token-number/+ token)
   (token 'number
-         (token-value t)
-         (token-line t)
-         (sub1 (token-col t))))
+         (token-value token)
+         (token-line token)
+         (sub1 (token-col token))))
 
-(define (token-number/- t)
-  (token 'number 
-         (- (token-value t))
-         (token-line t)
-         (sub1 (token-col t))))
+(define (token-number/- token)
+  (token 'number
+         (- (token-value token))
+         (token-line token)
+         (sub1 (token-col token))))
 
 (define (token-identifier symbol col)
   (token 'identifier symbol lex-line col))
@@ -140,12 +140,12 @@
   (let* ([col lex-col]
          [strport (open-output-string)]
          [is-identifier? (read-alphanumeric strport (char-varletter? (peek-char* chars)))]
-         [str (get-output-string strport)]) 
+         [str (get-output-string strport)])
     (cond
       [is-identifier?
        (let ([token (token-identifier (string->symbol str) col)])
          (stream-cons token (lex chars)))]
-      [(string=? str "#\\d#\\e#\\f#\\i#\\n#\\e")
+      [(string=? str "define")
        (let ([token (token-define col)])
          (stream-cons token (lex chars)))]
       [else

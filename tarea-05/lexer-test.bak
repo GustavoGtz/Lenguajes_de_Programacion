@@ -8,9 +8,9 @@
   (test-suite
    "Pruebas para lexer.rkt"
    (test-case "Lexer"
-              (check-equal?
-               (stream->list (lex-from-string "(define x 123) (+ 2 (* 42 25)))"))
-               (list '(#\() '(define))))))
+              (equal?
+               (lex-from-string (list->string '((define x 4) +54)))
+               (list '(token 'define #f lex-line col))))))
 
 (run-tests regex-tests 'verbose)
  
