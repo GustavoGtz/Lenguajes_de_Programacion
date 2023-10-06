@@ -126,7 +126,7 @@
 
 (define (lex-identifier-or-keyword chars)
   (define (read-alphanumeric strport is-identifier?)
-    (write (string->symbol (string (read-char* chars))) strport)
+    (display (read-char* chars) strport)
     (set! lex-col (add1 lex-col))
     (let [(ch (peek-char* chars))]
       (cond [(char-delimiter? ch)
@@ -141,7 +141,6 @@
          [strport (open-output-string)]
          [is-identifier? (read-alphanumeric strport (char-varletter? (peek-char* chars)))]
          [str (get-output-string strport)]
-         [x (print str)]
          )
     (cond
       [is-identifier?
@@ -205,7 +204,8 @@
   (lex (open-input-string str)))
 
 (provide lex-from-file
-         lex-from-string)
+         lex-from-string
+         token)
 
 
 
