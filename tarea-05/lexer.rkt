@@ -90,7 +90,7 @@
   (read-char* chars)
   (let ([ch (peek-char* chars)])
     (cond
-      [(char-digit? ch)
+      [(and (not (eof-object? ch))(char-digit? ch))
        (set! lex-col (add1 lex-col))
        (let* ([tokens (lex-plain-number chars)]
               [token (token-number/+ (stream-first tokens))])
@@ -105,7 +105,7 @@
   (let ([ch (peek-char* chars)]
         [col lex-col])
     (cond
-      [(char-digit? ch)
+      [(and (not (eof-object? ch))(char-digit? ch))
        (set! lex-col (add1 lex-col))
        (let* ([tokens (lex-plain-number chars)]
               [token (token-number/- (stream-first tokens))])
