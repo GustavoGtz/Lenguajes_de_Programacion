@@ -58,8 +58,25 @@
                             (list "ab" "cd" "ef" "gh"))
               (check-equal? (bundle-chunk (explode "abcdefg") 0)
                             (list)))
+   (test-case "partition"
+              (check-equal? (partition "abcdefg" 3)
+                            (list "abc" "def" "g"))
+              (check-equal? (partition "abcdefgh" 2)
+                            (list "ab" "cd" "ef" "gh"))
+              (check-equal? (partition "abcdefg" 0)
+                            (list)))
+
+   (test-case "isort"
+              (check-equal? (isort '(5 6 3 0) #t)
+                            '(0 3 5 6))
+              (check-equal? (isort '(5 6 3 0) #f)
+                            '(6 5 3 0))
+              (check-equal? (isort '(1) #t)
+                            '(1))
+              (check-equal? (isort '() #t)
+                            '()))
    
-             ))
+   ))
               
   
               
