@@ -1,0 +1,63 @@
+* c: Tarea Perpetua c: *
+Al inicio de todas las clases de eligirán aleatoriamente (con probabilidad uniforme) un estudiante y se le preguntará "¿Qué vimos la clase anterior?". Si responde incorrecto tendrá 10 puntos menos en la calificación final. Todos deben tomar nota de lo visto en clases.|
+
+Se retomo el concpeto de sintaxis concreta y abstracta.
+La sintaxis concreta hace referencia al programa escrito, en donde nosotros como usuarios podemos asignar distintos nombres, dependiendo del contexto y realmente ninguna de estas expresiones posee un valor, son simples cadenas de texto. En cambio la sintaxis abstracta esta enfocada al valor que posee un programa, se fija en que significado tiene las cadenas escritas. 
+
+	-> Ejemplo:
+	   Grámatica de sintasxis:
+	   
+	   o Concreta:
+	   	P -> (E)
+	   	  |  (D . P)
+	   	D -> (define V E)
+	   	E -> I
+	   	  |  V
+	   	  |  (+ E E)
+	   	  |  (* E E)
+	   	  
+	   o Abstracta:
+	   	(la-int n) | Racket -> (struct la-int (value) #transparent)
+	   	(la-var sym) | Racket -> (struct la-var (name) #transparent)
+	   	(la-sum e1 e2) | Racket -> (struct la-sum (left right) #transparent)
+	   	(la-mul e1 e2) | Racket -> (struct la-mul (left right) #transparent)
+	   	
+	   	
+	   
+	   # Implementación 
+	   	
+	   	(define (la-exp? x)
+	   		(or (la-int? x)
+	   		    (la-var? x)
+	   		    (la-sum? x)
+	   		    (la-mul? x)))
+	   	
+	   	(define (la-prog? x)
+	   		(or (la-progexp? x)
+	   		    (la-progdef? x)))
+	   		    
+	   	(define (eval-exp exp env)
+	   		(cond
+	   			[(la-int? exp) (la-int-val exp)]
+	   			[(la-var? exp) (apply-env env (la-var-name exp))]}
+	   			[(la-sum? exp) (+
+	   					   (eval-exp (la-sum-left exp) env))
+	   					   (eval-exp (la-sum-right exp) env))]
+	   					  
+	   			[(la-mul? exp) (*
+	   					   (eval-exp (la-mul-left exp) env))
+	   					   (eval-exp (la-mul-right exp) env))]
+	   			[else
+	   				(error "NO es una EXP!" exp)])))
+	   					  
+	   	(struct la-progexp (exp) #transparent)
+	   	(struct la-progdef (def prog) #transparent)
+	   	(struct la-int (value) #transparent)
+	   	(struct la-var (name) #transparent)
+	   	(struct la-sum (left right) #transparent)
+	   	(struct la-mul (left right) #transparent)
+	   	(struct la-def (var exp) #transparent)
+	   			
+	   
+
+
