@@ -77,20 +77,72 @@
          (cons n ls)
          (cons (first ls) (insert n (rest ls) ord)))]))
 
-; Implementacion de quicksort
-(define (quicksort ls)
+; Implementacion de quicksort (Problema 11)
+; ord = #t or #f, if #t -> ascending order, else descending order
+(define (quicksort ls ord)
   (cond
     [(empty? ls) null]
     [else
      (define pivot (first ls))
-     (append (quicksort (smallers ls pivot))
-             (list pivot)
-             (quicksort (largers ls pivot)))]))
+     (define notpivot (rest ls))
+     (if (equal? ord #t)
+         (append (quicksort (smallers notpivot pivot) ord)
+                 (list pivot)
+                 (quicksort (largers notpivot pivot) ord))
+                 
+         (append (quicksort (largers notpivot pivot) ord)
+                 (list pivot)
+                 (quicksort (smallers notpivot pivot) ord)))]))
+
 ; Problema 9.1
-(define (smallers ls) 0)
-(define (largers ls) 0)
+(define (smallers ls filt)
+  (if (empty? ls)
+      null
+      (let [(fs (first ls))]
+        (if (< fs filt)
+            (cons fs (smallers (rest ls) filt))
+            (smallers (rest ls) filt)))))
+
 ; Problema 9.2
+(define (largers ls filt)
+  (if (empty? ls)
+      null
+      (let [(fs (first ls))]
+        (if (>= fs filt)
+            (cons fs (largers (rest ls) filt))
+            (largers (rest ls) filt)))))
+
+; Problema 12
+(define (maliya-sort ls ord)
+  (define umb 5)
+  (if (> (length ls) umb)
+      (quicksort ls ord)
+      (isort ls ord)))
+
+; Problema 13.1
+(define (smallers-filter ls filt)
+  (filter (lambda (x) (< x filt)) ls))
+
+; Problema 13.2
+(define (largers-filter ls filt)
+  (filter (lambda (x) (>= x filt)) ls))
+
+; Problema 14
+; ord = #t or #f, if #t -> ascending order, else descending order
+(define (quicksort-filter ls ord)
+  (cond
+    [(empty? ls) null]
+    [else
+     (define pivot (first ls))
+     (define notpivot (rest ls))
+     (if (equal? ord #t)
+         (append (quicksort-filter (filter (lambda (x) (< x pivot)) notpivot) ord)
+                 (list pivot)
+                 (quicksort-filter (filter (lambda (x) (>= x pivot)) notpivot) ord))
+                 
+         (append (quicksort-filter (filter (lambda (x) (>= x pivot)) notpivot) ord)
+                 (list pivot)
+                 (quicksort-filter (filter (lambda (x) (< x pivot)) notpivot) ord)))]))
 
 (provide (all-defined-out))
-    
     
