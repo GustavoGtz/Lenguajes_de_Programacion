@@ -1,0 +1,38 @@
+
+Sintaxis Concreta ... Sintaxis Abstracta
+Program -> Expression ... (a-program exp)
+Expression -> Integer ... (const-exp num)
+Expression -> -(Expression, Expression) ... (diff-exp exp1 exp2)
+Expression -> zero?(Expression) ... (zero?-exp exp)
+Expression -> if Expression then Expression else Expression ... (if-exp exp1 exp2 exp3)
+Expression -> Identifier .. (var-exp var)
+Expression -> let Identifier = Expression in Expression ... (let-exp var exp body)
+
+Al momento de crear un struct, este a su vez crea distintos metodos intrinsecos a la estructura:
+
+Constructor: (nombre-struct arg-1 arg-2 ... arg-n)
+Selectores: (nombre-struct-arg-i instancia-struct) {i=(1, n)}
+Predicad: (nombre-struct? instancia-struct)
+
+
+o Implementacion en Racket:
+
+(struct a-program (exp) #transparent)
+(struct const-exp (num) #transparent)
+(struct diff-exp (exp1 exp2) #transparent)
+(struct zero?-exp (exp) #transparent)
+(struct if-exp (exp1 exp2 exp3) #transparent)
+(struct var-exp (var) #transparent)
+(struct let-exp (id exp body) #transparent)
+
+
+
+Ejemplo sintaxis concreta: 
+if zero?(-(x,11)) then -(y,2) else -(y,4)
+
+Ejemplo sintaxis abstracta:
+(if-exp (zero?-exp (diff-exp (var-exp 'x) (const-exp 11)))
+	(diff-exp (var-exp 'y) (const-exp 2))
+	(diff-exp (var-exp 'y) (const-exp 4))) 
+
+
