@@ -1,0 +1,23 @@
+let x = 7
+in let y = 2
+	in let y = let x = -(x,1)
+		in -(x,y)
+	in -(-(x,8),y)
+	
+
+(a-program
+(let-exp 'x (const-exp 7)
+	(let-exp 'y (const-exp 2)
+		(let-exp 'y (let-exp 'x (diff-exp (var-exp 'x) (const-exp 1)))
+			(diff-exp (diff-exp (var-exp 'x) (const-exp 8)) (var-exp 'y)))))
+Da error.
+
+Valores expresados
+Valores denotados (valor que se puede asignar a una variable)
+
+y=4
+
+7-8-4
+
+
+

@@ -75,10 +75,6 @@
     (stream-cons
      (pos-token (in-token) start-pos end-pos)
      (lex-let input-port))]
-   ["minus"
-    (stream-cons
-     (pos-token (minus-token) start-pos end-pos)
-     (lex-let input-port))]
    [int-re
     (stream-cons
      (pos-token (make-int-token lexeme) start-pos end-pos)

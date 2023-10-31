@@ -10,7 +10,6 @@
 (struct if-exp expression (exp1 exp2 exp3) #:transparent)
 (struct var-exp expression (var) #:transparent)
 (struct let-exp expression (var exp1 body) #:transparent)
-(struct minus-exp expression (exp1) #:transparent)
 
 (provide
  expression?
@@ -21,5 +20,4 @@
   [struct zero?-exp ((exp1 expression?))]
   [struct if-exp ((exp1 expression?) (exp2 expression?) (exp3 expression?))]
   [struct var-exp ((var symbol?))]
-  [struct let-exp ((var symbol?) (exp1 expression?) (body expression?))]
-  [struct minus-exp ((exp1 expression?))]))
+  [struct let-exp ((var symbol?) (exp1 expression?) (body expression?))]))

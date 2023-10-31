@@ -18,7 +18,6 @@
 (struct let-token token () #:transparent)
 (struct equals-token token () #:transparent)
 (struct in-token token () #:transparent)
-(struct minus-token token () #:transparent)
 
 (provide
  token?
@@ -36,5 +35,4 @@
   [struct else-token ()]
   [struct let-token ()]
   [struct equals-token ()]
-  [struct in-token ()]
-  [struct minus-token ()]))
+  [struct in-token ()]))

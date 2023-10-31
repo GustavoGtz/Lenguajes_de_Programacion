@@ -33,7 +33,6 @@
                     [(let-token) "let keyword"]
                     [(equals-token) "binding operator"]
                     [(in-token) "in keyword"]
-                    [(minus-token) "minus keyword"]
                     [_ "unexpected token"]))
           beg end)])))
 
@@ -57,11 +56,6 @@
                          (guard (expect-sugar open-paren-token?) "open parenthesis")
                          (guard parse-expression "an expression")
                          (guard (expect-sugar comma-token?) "a comma")
-                         (guard parse-expression "an expression")
-                         (guard (expect-sugar close-paren-token?) "close parenthesis"))
-              (parse/seq minus-exp
-                         (expect-sugar minus-token?)
-                         (guard (expect-sugar open-paren-token?) "open parenthesis")
                          (guard parse-expression "an expression")
                          (guard (expect-sugar close-paren-token?) "close parenthesis"))
               (parse/seq zero?-exp
