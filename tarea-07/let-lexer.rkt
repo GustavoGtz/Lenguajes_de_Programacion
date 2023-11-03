@@ -39,13 +39,41 @@
     (stream-cons
      (pos-token (close-paren-token) start-pos end-pos)
      (lex-let input-port))]
+   ["minus"
+    (stream-cons
+     (pos-token (minus-token) start-pos end-pos)
+     (lex-let input-port))]
    ["zero?"
     (stream-cons
      (pos-token (zero?-token) start-pos end-pos)
      (lex-let input-port))]
+   ["equal?"
+    (stream-cons
+     (pos-token (equal?-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["greater?"
+    (stream-cons
+     (pos-token (greater?-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["less?"
+    (stream-cons
+     (pos-token (less?-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["+"
+    (stream-cons
+     (pos-token (sum-token) start-pos end-pos)
+     (lex-let input-port))]
    ["-"
     (stream-cons
      (pos-token (diff-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["*"
+    (stream-cons
+     (pos-token (mult-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["/"
+    (stream-cons
+     (pos-token (div-token) start-pos end-pos)
      (lex-let input-port))]
    [","
     (stream-cons
@@ -74,10 +102,6 @@
    ["in"
     (stream-cons
      (pos-token (in-token) start-pos end-pos)
-     (lex-let input-port))]
-   ["minus"
-    (stream-cons
-     (pos-token (minus-token) start-pos end-pos)
      (lex-let input-port))]
    [int-re
     (stream-cons

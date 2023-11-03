@@ -19,19 +19,39 @@
      (num-val num)]
     [(var-exp var)
      (apply-env env var)]
+    [(sum-exp exp1 exp2)
+     (num-val (+ (expval->num (value-of exp1 env))
+                 (expval->num (value-of exp2 env))))]
     [(diff-exp exp1 exp2)
      (num-val (- (expval->num (value-of exp1 env))
                  (expval->num (value-of exp2 env))))]
+    [(mult-exp exp1 exp2)
+     (num-val (* (expval->num (value-of exp1 env))
+                 (expval->num (value-of exp2 env))))]
+    [(div-exp exp1 exp2)
+     (if (equal? 0 (expval->num (value-of exp2 env)))
+         (error (format "Divide by zero encountered"))
+         (num-val (quotient (expval->num (value-of exp1 env))
+                            (expval->num (value-of exp2 env)))))]
+    [(minus-exp exp1)
+     (num-val (- (expval->num (value-of exp1 env))))]
     [(zero?-exp exp1)
      (bool-val (zero? (expval->num (value-of exp1 env))))]
+    [(equal?-exp exp1 exp2)
+     (bool-val (equal? (expval->num (value-of exp1 env))
+                       (expval->num (value-of exp2 env))))]
+    [(greater?-exp exp1 exp2)
+     (bool-val (> (expval->num (value-of exp1 env))
+                  (expval->num (value-of exp2 env))))]
+    [(less?-exp exp1 exp2)
+     (bool-val (< (expval->num (value-of exp1 env))
+                  (expval->num (value-of exp2 env))))]
     [(if-exp exp1 exp2 exp3)
      (if (expval->bool (value-of exp1 env))
          (value-of exp2 env)
          (value-of exp3 env))]
     [(let-exp var exp1 body)
      (value-of body (extend-env var (value-of exp1 env) env))]
-    [(minus-exp exp1)
-     (num-val (- (expval->num (value-of exp1 env))))]
     [_
      (error (format "Expected expression but got ~a" exp))]))
 

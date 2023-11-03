@@ -48,52 +48,7 @@
             (int-token 11)
             (close-paren-token)
             (close-paren-token))))
-   
-   (test-case "example 1.1"
-     (check-equal?
-      (tokenize "+(55, +(x, 11))")
-      (list (sum-token)
-            (open-paren-token)
-            (int-token 55)
-            (comma-token)
-            (sum-token)
-            (open-paren-token)
-            (id-token 'x)
-            (comma-token)
-            (int-token 11)
-            (close-paren-token)
-            (close-paren-token))))
 
-   (test-case "example 1.1"
-     (check-equal?
-      (tokenize "*(55, *(x, 11))")
-      (list (mult-token)
-            (open-paren-token)
-            (int-token 55)
-            (comma-token)
-            (mult-token)
-            (open-paren-token)
-            (id-token 'x)
-            (comma-token)
-            (int-token 11)
-            (close-paren-token)
-            (close-paren-token))))
-   
-   (test-case "example 1.3"
-     (check-equal?
-      (tokenize "/(55, /(x, 11))")
-      (list (div-token)
-            (open-paren-token)
-            (int-token 55)
-            (comma-token)
-            (div-token)
-            (open-paren-token)
-            (id-token 'x)
-            (comma-token)
-            (int-token 11)
-            (close-paren-token)
-            (close-paren-token))))
-   
    (test-case "example 2"
      (check-equal?
       (tokenize "-(-(x, 3), -(v, i))")
