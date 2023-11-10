@@ -46,6 +46,18 @@
     [(less?-exp exp1 exp2)
      (bool-val (< (expval->num (value-of exp1 env))
                   (expval->num (value-of exp2 env))))]
+    [(null?-exp exp1)
+     (bool-val (equal? (value-of exp1 env) null-val))]
+    [(cons-exp exp1 exp2)
+     (let ([val1 (value-of exp1 env)]
+           [val2 (value-of exp2 env)])
+       (pair-val (cons val1 val2)))]
+    [(car-exp exp1)
+     (car (expval->pair (value-of exp1 env)))]
+    [(cdr-exp exp1)
+     (cdr (expval->pair (value-of exp1 env)))]
+    [(emptylist-exp)
+     (null-val)]
     [(if-exp exp1 exp2 exp3)
      (if (expval->bool (value-of exp1 env))
          (value-of exp2 env)

@@ -14,6 +14,11 @@
 (struct equal?-token token () #:transparent)
 (struct greater?-token token () #:transparent)
 (struct less?-token token () #:transparent)
+(struct null?-token token () #:transparent)
+(struct cons-token token () #:transparent)
+(struct car-token token () #:transparent)
+(struct cdr-token token () #:transparent)
+(struct emptylist-token token () #:transparent)
 (struct sum-token token () #:transparent)
 (struct diff-token token () #:transparent)
 (struct mult-token token () #:transparent)
@@ -40,6 +45,11 @@
   [struct equal?-token ()]
   [struct greater?-token ()]
   [struct less?-token ()]
+  [struct null?-token ()]
+  [struct cons-token ()]
+  [struct car-token ()]
+  [struct cdr-token ()]
+  [struct emptylist-token ()]
   [struct sum-token ()]
   [struct diff-token ()]
   [struct mult-token ()]

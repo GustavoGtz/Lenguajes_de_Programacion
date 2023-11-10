@@ -3,6 +3,18 @@
 (require "let-interp.rkt"
          "let-vals.rkt")
 
+(define (printval str)
+  (match str
+    [(num-val x) (printf "~a" x)]
+    [(bool-val x) (printf "~a" (if x "true" "false"))]
+    [(pair-val x)
+     (printf "(")
+     (printval (car x))
+     (printf " . ")
+     (printval (cdr x))
+     (printf ")")]
+    [(null-val) (printf "()")]))
+
 (define (get-line)
   (define ch (peek-char))
   (cond [(eof-object? ch)
@@ -29,12 +41,13 @@
                        [exn:fail?
                         (lambda (exn)
                           (printf "Error: ~a\n" (exn-message exn)))])
-         (match (interpret-string str)
-           [(num-val x) (printf "~a\n" x)]
-           [(bool-val x) (printf "~a\n" (if x "true" "false"))]))
+         (printval (interpret-string str))
+         (printf "\n"))
        (repl)])))
 
 (with-handlers ([exn:break?
                  (lambda args
                    (printf "User break, exiting...\n"))])
   (repl))
+
+

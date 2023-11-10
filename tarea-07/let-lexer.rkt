@@ -59,6 +59,26 @@
     (stream-cons
      (pos-token (less?-token) start-pos end-pos)
      (lex-let input-port))]
+   ["null?"
+    (stream-cons
+     (pos-token (null?-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["cons"
+    (stream-cons
+     (pos-token (cons-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["car"
+    (stream-cons
+     (pos-token (car-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["cdr"
+    (stream-cons
+     (pos-token (cdr-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["emptylist"
+    (stream-cons
+     (pos-token (emptylist-token) start-pos end-pos)
+     (lex-let input-port))]
    ["+"
     (stream-cons
      (pos-token (sum-token) start-pos end-pos)

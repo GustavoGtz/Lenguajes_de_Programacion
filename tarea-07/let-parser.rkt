@@ -29,6 +29,11 @@
                     [(equal?-token) "equal? operator"]
                     [(greater?-token) "greater? operator"]
                     [(less?-token) "less? operator"]
+                    [(null?-token) "null? operator"]
+                    [(cons-token) "cons operator"]
+                    [(car-token) "car operator"]
+                    [(cdr-token) "cdr operator"]
+                    [(emptylist-token) "emptylist operator"]
                     [(sum-token) "plus operator"]
                     [(diff-token) "minus operator"]
                     [(mult-token) "multiplication operator"]
@@ -124,6 +129,30 @@
                          (guard parse-expression "an expression")
                          (guard (expect-sugar else-token?) "else keyword")
                          (guard parse-expression "an expression"))
+              (parse/seq null?-exp
+                         (expect-sugar null?-token?)
+                         (guard (expect-sugar open-paren-token?) "open parenthesis")
+                         (guard parse-expression "an expression")
+                         (guard (expect-sugar close-paren-token?) "close parenthesis"))
+              (parse/seq cons-exp
+                         (expect-sugar cons-token?)
+                         (guard (expect-sugar open-paren-token?) "open parenthesis")
+                         (guard parse-expression "an expression")
+                         (guard (expect-sugar comma-token?) "a comma")
+                         (guard parse-expression "an expression")
+                         (guard (expect-sugar close-paren-token?) "close parenthesis"))
+              (parse/seq car-exp
+                         (expect-sugar car-token?)
+                         (guard (expect-sugar open-paren-token?) "open parenthesis")
+                         (guard parse-expression "an expression")
+                         (guard (expect-sugar close-paren-token?) "close parenthesis"))
+              (parse/seq cdr-exp
+                         (expect-sugar cdr-token?)
+                         (guard (expect-sugar open-paren-token?) "open parenthesis")
+                         (guard parse-expression "an expression")
+                         (guard (expect-sugar close-paren-token?) "close parenthesis"))
+              (parse/seq emptylist-exp
+                         (expect-sugar emptylist-token?))
               (parse/seq var-exp
                          (expect-some id-token? id-token-name))
               (parse/seq let-exp
