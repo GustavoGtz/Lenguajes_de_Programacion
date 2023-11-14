@@ -19,6 +19,7 @@
 (struct car-exp expression (exp1) #:transparent)
 (struct cdr-exp expression (exp1) #:transparent)
 (struct emptylist-exp expression () #:transparent)
+(struct list-exp expression (exps) #:transparent)
 (struct if-exp expression (exp1 exp2 exp3) #:transparent)
 (struct var-exp expression (var) #:transparent)
 (struct let-exp expression (var exp1 body) #:transparent)
@@ -43,6 +44,7 @@
   [struct car-exp ((exp1 expression?))]
   [struct cdr-exp ((exp1 expression?))]
   [struct emptylist-exp ()]
+  [struct list-exp ((exps (listof expression?)))]
   [struct if-exp ((exp1 expression?) (exp2 expression?) (exp3 expression?))]
   [struct var-exp ((var symbol?))]
   [struct let-exp ((var symbol?) (exp1 expression?) (body expression?))]))

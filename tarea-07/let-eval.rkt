@@ -58,6 +58,8 @@
      (cdr (expval->pair (value-of exp1 env)))]
     [(emptylist-exp)
      (null-val)]
+    [(list-exp exps)
+      exps]
     [(if-exp exp1 exp2 exp3)
      (if (expval->bool (value-of exp1 env))
          (value-of exp2 env)

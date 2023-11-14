@@ -19,6 +19,7 @@
 (struct car-token token () #:transparent)
 (struct cdr-token token () #:transparent)
 (struct emptylist-token token () #:transparent)
+(struct list-token token () #:transparent)
 (struct sum-token token () #:transparent)
 (struct diff-token token () #:transparent)
 (struct mult-token token () #:transparent)
@@ -30,6 +31,7 @@
 (struct let-token token () #:transparent)
 (struct equals-token token () #:transparent)
 (struct in-token token () #:transparent)
+
 
 
 (provide
@@ -50,6 +52,7 @@
   [struct car-token ()]
   [struct cdr-token ()]
   [struct emptylist-token ()]
+  [struct list-token ()]
   [struct sum-token ()]
   [struct diff-token ()]
   [struct mult-token ()]

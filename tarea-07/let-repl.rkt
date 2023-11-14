@@ -10,11 +10,21 @@
     [(pair-val x)
      (printf "(")
      (printval (car x))
-     (printf " . ")
-     (printval (cdr x))
+     (printlist (cdr x))
      (printf ")")]
     [(null-val) (printf "()")]))
 
+(define (printlist val)
+  (match val
+    [(null-val) (printf "")]
+    [(pair-val pair)
+     (printf " ")
+     (printval (car pair))
+     (printlist (cdr pair))]
+    [_
+     (printf " . ")
+     (printval val)]))
+  
 (define (get-line)
   (define ch (peek-char))
   (cond [(eof-object? ch)
