@@ -1,0 +1,434 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\begin{document}
+% -----------------------PORTADA-------------------------------------------
+\begin{titlepage}
+	\centering
+	\includegraphics[width=0.5\textwidth]{unisonlogo.jpg}\par\vspace{1cm}
+	{\scshape\LARGE Universidad de Sonora\par}
+	\vspace{1cm}
+	{\scshape\Large Tarea 7\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Lenguajes de Programación\par}
+	\vspace{2cm}
+	{\Large\itshape Gutierrez Navarro Gustavo\par}
+	\vfill
+	\vfill
+	{\large \today\par}
+\end{titlepage}
+% -------------------------------------------------------------------------
+\section{Preguntas:}
+\begin{itemize} 
+% -------------------------------------------------------------------------------------
+    \item[\textbf{1.}] \textbf{{\Large Extiende el lenguaje agregando un nuevo operador minus que toma un argumento $n$ y regresa $-n$.}}\\
+    \\
+    \textbf{Especificacion Lexica}\\
+    \\
+    \hspace*{10mm}minus = minus\\
+    \\
+    \textbf{Especificacion Sintactica}\\
+    \\
+    \hspace*{10mm}\underline{Concreta}\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{minus}($Expression$)\\
+    \\
+    \hspace*{10mm} \underline{Abstracta}\\
+    \hspace*{10mm}(minus-exp $exp1$)\\
+    \\
+    \textbf{Especificacion Semantica}\\
+    \\
+    \hspace*{10mm}
+        $$\frac
+        {\mathcal{E}(-(0,exp_1),\rho)=x}
+        {\mathcal{E}(\text{minus}(exp_1),\rho)=x}$$
+        \hspace*{10mm}
+    \\
+% -------------------------------------------------------------------------------------
+    \item[\textbf{2.}] \textbf{{\Large Extiende el lenguaje agregando operadores para la suma, multiplicación y cociente de enteros.}}\\
+    \\
+    \textbf{Especificacion Lexica}\\
+    \\
+    \hspace*{10mm}suma = +\\
+    \hspace*{10mm}multiplicacion = *\\
+    \hspace*{10mm}cociente(enteros) = /\\
+    \\
+    \textbf{Especificacion Sintactica}\\
+    \\
+    \hspace*{10mm} \underline{Concreta}\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{+} ($Expression,Expression$)\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{-} ($Expression,Expression$)\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{/}($Expression,Expression$)\\
+    \\
+    \hspace*{10mm} \underline{Abstracta}\\
+    \hspace*{10mm}(sum-exp $exp1$ $exp2$)\\
+    \hspace*{10mm}(mult-exp $exp1$ $exp2$)\\
+    \hspace*{10mm}(div-exp $exp1$ $exp2$)\\
+    \textbf{Especificacion Semantica}\\
+    \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)=x,\hspace{1mm}\mathcal{E}(exp_2,\rho)=y}
+        {\mathcal{E}(\text{+}(exp_1, exp_2),\rho)=x+y}$
+        \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)=x,\hspace{1mm}\mathcal{E}(exp_2,\rho)=y}
+        {\mathcal{E}(\text{*}(exp_1, exp_2),\rho)=x*y}$\\
+        \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_2,\rho)=0}
+        {\mathcal{E}(\text{/}(exp_1, exp_2),\rho)=error}$
+        \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)=x,\hspace{1mm}\mathcal{E}(exp_2,\rho)=y}
+        {\mathcal{E}(\text{/}(exp_1, exp_2),\rho)=x/y}$
+    \\
+% -------------------------------------------------------------------------------------
+    \item[\textbf{3.}] \textbf{{\Large Agrega un predicado de igualdad numérica $equal?$ y predicados de orden $greater?$ y $less?$.}}\\
+    \\
+    \textbf{Especificacion Lexica}\\
+    \\
+    \hspace*{10mm}equal? = equal?\\
+    \hspace*{10mm}$>$ = greater?\\
+    \hspace*{10mm}$<$ = less?\\
+    \\
+    \textbf{Especificacion Sintactica}\\
+    \\
+    \hspace*{10mm} \underline{Concreta}\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{equal?} ($Expression,Expression$)\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{greater?} ($Expression,Expression$)\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{less?} ($Expression,Expression$)\\
+    \\
+    \hspace*{10mm} \underline{Abstracta}\\
+    \hspace*{10mm}(equal?-exp $exp1$ $exp2$)\\
+    \hspace*{10mm}(greater?-exp $exp1$ $exp2$)\\
+    \hspace*{10mm}(less?-exp $exp1$ $exp2$)\\
+    \\
+    \textbf{Especificacion Semantica}\\
+    \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(\mathcal{E}(exp_1,\rho)-\mathcal{E}(exp_2,\rho))\rho)=0}
+        {\mathcal{E}(\text{equal?}(exp_1, exp_2),\rho)=\#t}$
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(\mathcal{E}(exp_1,\rho)-\mathcal{E}(exp_2,\rho))\rho)\neq0}
+        {\mathcal{E}(\text{equal?}(exp_1, exp_2),\rho)=\#f}$\\
+    \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(\mathcal{E}(exp_1,\rho)-\mathcal{E}(exp_2,\rho))\rho)>0}
+        {\mathcal{E}(\text{greater?}(exp_1, exp_2),\rho)=\#t}$
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(\mathcal{E}(exp_1,\rho)-\mathcal{E}(exp_2,\rho))\rho)<=0}
+        {\mathcal{E}(\text{greater?}(exp_1, exp_2),\rho)=\#f}$\\
+    \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(\mathcal{E}(exp_1,\rho)-\mathcal{E}(exp_2,\rho))\rho)<0}
+        {\mathcal{E}(\text{less?}(exp_1, exp_2),\rho)=\#t}$
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(\mathcal{E}(exp_1,\rho)-\mathcal{E}(exp_2,\rho))\rho)>=0}
+        {\mathcal{E}(\text{less?}(exp_1, exp_2),\rho)=\#f}$
+    \\
+% -------------------------------------------------------------------------------------
+    \newpage
+    \item[\textbf{4.}] \textbf{{\Large Agrega operaciones de procesamiento de listas al lenguaje, incluyendo cons , car , cdr , null? y emptylist . Una lista debe poder contener cualquier valor expresado, incluyendo otra lista.}}\\
+    \\
+    \textbf{Especificacion Lexica}\\
+    \\
+    \hspace*{10mm}cons = cons\\
+    \hspace*{10mm}car = car\\
+    \hspace*{10mm}cdr = cdr\\
+    \hspace*{10mm}null? = null?\\
+    \hspace*{10mm}emptylist = emptylist\\
+    \\
+    \textbf{Especificacion Sintactica}\\
+    \\
+    \hspace*{10mm} \underline{Concreta}\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{cons} ($Expression,Expression$)\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{car} ($Expression$)\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{cdr} ($Expression$)\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{null?} ($Expression$)\\
+    \hspace*{10mm}$Expression\rightarrow$ \textbf{emptylist} ()\\
+    \\
+    \hspace*{10mm} \underline{Abstracta}\\
+    \hspace*{10mm}(cons-exp $exp1$ $exp2$)\\
+    \hspace*{10mm}(car-exp $exp1$)\\
+    \hspace*{10mm}(cdr-exp $exp1$)\\
+    \hspace*{10mm}(null?-exp $exp1$)\\
+    \hspace*{10mm}(emptylist-exp $exp1$)\\
+    \\
+    \textbf{Especificacion Semantica}\\
+    \\
+    {\small\hspace*{10mm}(value-of (cons $exp1$ $exp2$)) = (pair-val (value-of $exp1$) (value-of $exp2$))}\\
+    \hspace*{10mm}(value-of (car (cons $exp1$ $exp2$))) = (value-of $exp1$))\\
+    \hspace*{10mm}(value-of (cdr (cons $exp1$ $exp2$) )) = (value-of $exp2$))\\
+    \hspace*{10mm}(value-of (null? $exp1$ ) = (if (= $exp1$ emptylist) \#t \#f)\\
+    \hspace*{10mm}(value-of emptylist)= null\\
+    \\
+% -------------------------------------------------------------------------------------
+    \newpage
+    \item[\textbf{5.}] \textbf{{\Large Agrega una operación $list$ al lenguaje}}\\
+    \\
+    \textbf{Especificacion Lexica}\\
+    \\
+    \hspace*{10mm} list = list\\
+    \\
+    \textbf{Especificacion Sintactica}\\
+    \\
+    \hspace*{10mm} \underline{Concreta}\\
+    \hspace*{10mm} $Expression\rightarrow$ \textbf{list}($Expressions$)\\
+    \\
+    \hspace*{10mm} $Expressions\rightarrow$ $\epsilon$\\
+    \hspace*{10mm} $Expressions\rightarrow$ $Expressions1$\\
+    \\
+    \hspace*{10mm} $Expressions1\rightarrow$ $Expression$\\
+    \hspace*{10mm} $Expressions1\rightarrow$ $Expression,Expressions1$\\
+    \\
+    \hspace*{10mm} \underline{Abstracta}\\
+    \hspace*{10mm} (list-exp $exps$)\\
+    \\
+    \textbf{Especificacion Semantica}\\
+    \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}((\text{null? }exps),\rho)=\text{\#t}}
+        {\mathcal{E}((\text{list-exp }exps),\rho)=emptylist}$
+        \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_0,\rho)=val_1,\hspace{1mm}\mathcal{E}(list(exp_1,...),\rho)=val_2}
+        {\mathcal{E}(\text{list}(exp_0,exp_1,...),\rho)=\text{pair}(val_1,val_2)}$\\
+    \\
+% -------------------------------------------------------------------------------------
+    \item[\textbf{7.}] \textbf{{\Large Incorpora al lenguaje expresiones $cond$ en base a la siguiente gramatica}}\\
+    \\
+    $$Expression\rightarrow\textbf{cond}\{ Expression=>Expression \}^*\textbf{end}$$
+    \\
+    \textbf{Especificacion Lexica}\\
+    \\
+    \hspace*{10mm} cond = cond\\
+    \hspace*{10mm} end = end\\
+    \hspace*{10mm} =$>$ = =$>$\\
+    \\
+    \textbf{Especificacion Sintactica}\\
+    \\
+    \hspace*{10mm} \underline{Concreta}\\
+    \hspace*{10mm}$Expression\rightarrow\textbf{cond}\{ Expression=>Expression \}^*\textbf{end}$
+    \\
+    \hspace*{10mm} \underline{Abstracta}\\
+    \hspace*{10mm}(cond-exp $exps$)\\
+    \newpage
+    \textbf{Especificacion Semantica}\\
+    \\
+        \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)=\#t,\hspace{1mm}\mathcal{E}(exp_2),\rho)=x}
+        {\mathcal{E}(\text{cond}(exp_1,exp_2,exp,...),\rho)=x}$
+        \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)=\#f,\hspace{1mm}\mathcal{E}(\text{cond}(exp,...)),\rho)=x}
+        {\mathcal{E}(\text{cond}(exp_1,exp_2,exp,...),\rho)=x}$\\
+        $$\frac
+        {}
+        {\mathcal{E}(\text{cond}(),\rho)=error}$$
+        \\
+% -------------------------------------------------------------------------------------
+    \item[\textbf{8.}] \textbf{{\Large Cambia los valores del lenguaje para que los enteros sean los únicos valores expresados con todos los cambios que esto implica.}}\\
+    \\
+    \textbf{Especificacion Lexica}\\
+    \\
+    \hspace*{10mm} Sin cambios.\\
+    \\
+    \textbf{Especificacion Sintactica}\\
+    \\
+    \hspace*{10mm} \underline{Concreta}\\
+    \hspace*{10mm} Sin cambios.\\
+    \\
+    \hspace*{10mm} \underline{Abstracta}\\
+    \hspace*{10mm} Sin cambios.\\
+    \\
+    \textbf{Especificacion Semantica}\\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)=x}
+        {\mathcal{E}(\text{zero?}(exp_1,\rho)=x}$
+        \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)=0,\hspace{1mm}\mathcal{E}(exp_2,\rho)=x}
+        {\mathcal{E}(\text{if}(exp_1,exp_2,exp_3),\rho)=x}$
+        \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)\neq 0,\hspace{1mm}\mathcal{E}(exp_3,\rho)=y}
+        {\mathcal{E}(\text{if}(exp_1,exp_2,exp_3),\rho)=y}$\\
+        \\
+    \\
+% -------------------------------------------------------------------------------------
+    \item[\textbf{9.}] \textbf{{\Large Agrega una nueva categoría sintáctica $Bool-exp$ de expresiones booleanas al lenguaje. Cambia la producción para expresiones condicionales para que sea}}
+    \begin{center}
+        $Expression\rightarrow$ \textbf{if} $Bool-exp$ \textbf{then} $Expression$ \textbf{else} $Expression$
+    \end{center}
+    \textbf{Especificacion Lexica}\\
+    \\
+    \hspace*{10mm} Sin cambios.
+    \newpage
+    \textbf{Especificacion Sintactica}\\
+    \\
+    \hspace*{10mm} \underline{Concreta}\\
+    \hspace*{10mm} $Expression\rightarrow$ \textbf{if} $Bool-exp$ \textbf{then} $Expression$ \textbf{else} $Expression$\\
+    \hspace*{10mm} $Bool-exp\rightarrow$ \#t\\
+    \hspace*{10mm} $Bool-exp\rightarrow$ \#f\\
+    \hspace*{10mm} $Bool-exp\rightarrow$ \textbf{zero?}($Expression$)\\   
+    \hspace*{10mm} $Bool-exp\rightarrow$ \textbf{equal?}($Expression,Expression$)\\
+    \hspace*{10mm} $Bool-exp\rightarrow$ \textbf{greater?}($Expression,Expression$)\\
+    \hspace*{10mm} $Bool-exp\rightarrow$ \textbf{less?}($Expression,Expression$)\\
+    \\
+    \hspace*{10mm} \underline{Abstracta}\\
+    \hspace*{10mm} (if $boolexp$ $exp1$ $exp2$)\\
+    \hspace*{10mm} (bool-exp $bool$)\hspace{10mm} $\rightarrow$ ($bool$ puede ser \#t o \#f)\\
+    \hspace*{10mm} (zero?-boolexp $exp1$)\\
+    \hspace*{10mm} (equal?-boolexp $exp1$, $exp2$)\\
+    \hspace*{10mm} (greater?-boolexp $exp1$, $exp2$)\\
+    \hspace*{10mm} (less?-boolexp $exp1$, $exp2$)\\
+    \\
+    \textbf{Especificacion Semantica}\\
+    \\
+    \hspace*{10mm} (value-of (bool-exp $b$), $\rho$) = (bool-val $b$)\\
+    \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(boolexp,\rho)=\#t\hspace{1mm}\mathcal{E}(exp_1,\rho)=x}
+        {\mathcal{E}(\text{if}(boolexp, exp_1, exp_2),\rho)=x}$
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(boolexp,\rho)=\#f\hspace{1mm}\mathcal{E}(exp_2,\rho)=y}
+        {\mathcal{E}(\text{if}(boolexp, exp_1, exp_2),\rho)=y}$\\
+    \\
+    \hspace*{10mm} Los predicados del ejercicio 3 se quedarian igual.\\
+    \\
+% -------------------------------------------------------------------------------------
+    \item[\textbf{10.}] \textbf{{\Large Modifica la implementación del intérprete agregando una nueva operación $print$ que toma un argumento, lo imprime, y regresa el entero 1. \textquestiondown Por qué esta operación no es ex-presable en nuestro método de especificación formal?}}\\
+    \\
+    Uno de nuestros puntos débiles al especificar de manera formal es la limitación para conectarnos con el entorno externo.\\
+    \\
+    Observando más de cerca, todos los procesos comparten una característica fundamental: reciben algúna entrada y generan una salida, a veces en espacios diferentes, pero su operación es esencialmente similar.\\
+    \\
+    La función $print$ puede ser especificada hasta cierto punto; sin embargo, el concepto de imprimir no existe en este contexto, lo que hace imposible expresar la acción de imprimir. El proceso de la especificación formal termina con el evaluador que devuelve un valor pero nosotros metemos de por medio una impresion del valor.
+
+% -------------------------------------------------------------------------------------
+    \item[\textbf{11.}] \textbf{{\Large Extiende el lenguaje para que las expresiones $let$ puedan vincular una cantidad arbitraria de variables, usando la producción,}}
+    \begin{center}
+        $Expression\rightarrow$ \textbf{let} $\{ Identifier = Expression \}^*$ \textbf{in} $Expression$
+    \end{center}
+    \textbf{Especificacion Lexica}\\
+    \\
+    \hspace*{10mm} Sin cambios.\\
+    \\
+    \textbf{Especificacion Sintactica}\\
+    \\
+    \hspace*{10mm} \underline{Concreta}\\
+    \hspace*{10mm} $Expression\rightarrow$ \textbf{let} $\{ Identifier = Expression \}^*$ \textbf{in} $Expression$\\
+    \hspace*{10mm} $Iexps\rightarrow\epsilon$\\
+    \hspace*{10mm} $Iexps\rightarrow IExps1$\\
+    \hspace*{10mm} $Iexps1\rightarrow Identifier\ Expression$\\
+    \hspace*{10mm} $Iexps1\rightarrow Identifier\ Expression\ Iexps1$\\
+    \\
+    \hspace*{10mm} \underline{Abstracta}\\
+    \hspace*{10mm} (let-exp $Iexps$ $body$)\\
+    \\
+    \textbf{Especificacion Semantica}\\
+    \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)=val_1\hspace{1mm}\mathcal{E}(exp,\rho)=val\ ...}
+        {\mathcal{E}(\text{let}((id_1\ exp_1\ id\ exp\ ...)\ body),\rho)=\mathcal{E}(\text{let}(()\ body), [id_1 : val_1,\ id : val,\ ...]\rho)}$
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(body,\rho)=x}
+        {\mathcal{E}(\text{let}(() body),\rho)=x}$
+    \\
+% -------------------------------------------------------------------------------------
+    \item[\textbf{12.}] \textbf{{\Large Extiende el lenguaje con una expresión $let*$.}}\\
+    \\
+    \textbf{Especificacion Lexica}\\
+    \\
+    \hspace*{10mm} $\text{Let}^*=\text{Let}^*$\\
+    \\
+    \textbf{Especificacion Sintactica}\\
+    \\
+    \hspace*{10mm} \underline{Concreta}\\
+    \hspace*{10mm} $Expression\rightarrow$ \textbf{let}$^*$ $\{ Identifier = Expression \}^*$ \textbf{in} $Expression$
+    \hspace*{10mm} $Iexps$ y $Iexps1$ se reutilizan.
+    \newpage
+    \hspace*{10mm} \underline{Abstracta}\\
+    \hspace*{10mm} (let-exp* $Iexps$ $body$)\\
+    \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)=val_1}
+        {\mathcal{E}(\text{let}^*((id_1\ exp_1\ id\ exp\ ...)\ body),\rho)=\mathcal{E}(\text{let}^*((id\ exp\ ...)\ body), [id_1 : val_1]\rho)}$
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(body,\rho)=x}
+        {\mathcal{E}(\text{let}^*(() body),\rho)=x}$
+    \\
+% -------------------------------------------------------------------------------------
+    \item[\textbf{13.}] \textbf{{\Large Agrega una expresión al lenguaje de acuerdo a la siguiente regla,}}
+    \begin{center}
+        $Expression\rightarrow\textbf{unpack}\{ Identifier \}^*=Expression\textbf{ in }Expression$
+    \end{center}
+    tal que $unpack$ x y z = $lst$ in ... vincula x , y y z a los elementos de $lst$ si $lst$ es una lista con exactamente tres elementos, reportando un error en otro caso.\\
+    \\
+    \textbf{Especificacion Lexica}\\
+    \\
+    \hspace*{10mm} unpack = unpack.\\
+    \\
+    \textbf{Especificacion Sintactica}\\
+    \\
+    \hspace*{10mm} \underline{Concreta}\\
+    \hspace*{10mm} $Expression\rightarrow\textbf{unpack}\{ Identifier \}^*=Expression\textbf{ in }Expression$\\
+    \hspace*{10mm} $Ids\rightarrow\epsilon$\\
+    \hspace*{10mm} $Ids\rightarrow Ids1$\\
+    \hspace*{10mm} $Ids1\rightarrow Identifier$\\
+    \hspace*{10mm} $Ids1\rightarrow Identifier\ Ids1$\\
+    \\
+    \hspace*{10mm} \underline{Abstracta}\\
+    \hspace*{10mm} (unpack-exp $Ids$ $expl$ $body$)\hspace{10mm} $expl,body$ = $Expression$\\
+    \\
+    \textbf{Especificacion Semantica}\\
+    \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)=pair(val_1,rest)}
+        {\mathcal{E}(\text{unpack}((id_1\ id\ ...)\ exp_1\ body),\rho)=\mathcal{H}(\text{list}(id_1\ id\ ...),pair(val_1,rest),body,\rho)}$\\
+    \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(exp_1,\rho)=val_1\hspace{1mm}\mathcal{E}(body,\rho)=val}
+        {\mathcal{E}(\text{unpack}(()\ exp_1\ body),\rho)=val}$
+    \hspace*{10mm}
+        $\frac
+        {}
+        {\mathcal{H}(\text{list}(x_1\ x\ ...),\ pair(val_0,rest),body,\rho)=\mathcal{H}(\text{list}(x\ ...),rest,body,[x_1=val_0]\rho)}$\\
+    \\
+    \hspace*{10mm}
+        $\frac
+        {\mathcal{E}(body,\rho)=val_1}
+        {\mathcal{H}(\text{emptylist},\text{emptylist},body,\rho)=val_1}$
+    \hspace*{10mm}
+        $\frac
+        {   val_1\neq\text{emptylist}}
+        {\mathcal{H}(\text{list}(),val_1,body,\rho)=error}$\\
+    \\
+    
+        
+% -------------------------------------------------------------------------------------
+\end{itemize}
+% -------------------------------------------------------------------------
+% -------------------------------------------------------------------------
+
+\end{document}
+
