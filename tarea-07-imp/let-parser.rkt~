@@ -33,13 +33,6 @@
                     [(let-token) "let keyword"]
                     [(equals-token) "binding operator"]
                     [(in-token) "in keyword"]
-                    [(null?-token) "null? operator"]
-                    [(cons-token) "cons operator"]
-                    [(car-token) "car operator"]
-                    [(cdr-token) "cdr operator"]
-                    [(emptylist-token) "emptylist operator"]
-                    [(list-token) "list operator"]
-                    [(print-token) "print keyword"]
                     [_ "unexpected token"]))
           beg end)])))
 
@@ -85,48 +78,7 @@
                          (guard (expect-sugar equals-token?) "binding operator")
                          (guard parse-expression "an expression")
                          (guard (expect-sugar in-token?) "in keyword")
-                         (guard parse-expression "an expression"))
-              (parse/seq null?-exp
-                         (expect-sugar null?-token?)
-                         (guard (expect-sugar open-paren-token?) "open parenthesis")
-                         (guard parse-expression "an expression")
-                         (guard (expect-sugar close-paren-token?) "close parenthesis"))
-              (parse/seq cons-exp
-                         (expect-sugar cons-token?)
-                         (guard (expect-sugar open-paren-token?) "open parenthesis")
-                         (guard parse-expression "an expression")
-                         (guard (expect-sugar comma-token?) "a comma")
-                         (guard parse-expression "an expression")
-                         (guard (expect-sugar close-paren-token?) "close parenthesis"))
-              (parse/seq car-exp
-                         (expect-sugar car-token?)
-                         (guard (expect-sugar open-paren-token?) "open parenthesis")
-                         (guard parse-expression "an expression")
-                         (guard (expect-sugar close-paren-token?) "close parenthesis"))
-              (parse/seq cdr-exp
-                         (expect-sugar cdr-token?)
-                         (guard (expect-sugar open-paren-token?) "open parenthesis")
-                         (guard parse-expression "an expression")
-                         (guard (expect-sugar close-paren-token?) "close parenthesis"))
-              (parse/seq emptylist-exp
-                         (expect-sugar emptylist-token?))
-              (parse/seq list-exp
-                         (expect-sugar list-token?)
-                         (guard (expect-sugar open-paren-token?) "open parenthesis")
-                         (parse/alt
-                          (expect-sugar close-paren-token? "close parenthesis")
-                          (parse/seq cons
-                                     (guard parse-expression "some expressions")
-                                     (parse/kleene identity
-                                                   (parse/seq identity
-                                                              (guard (expect-sugar comma-token?) "a comma")
-                                                              (guard parse-expression "some expressions")))
-                                     (guard (expect-sugar close-paren-token?) "close parenthesis"))))
-              (parse/seq print-exp
-                         (expect-sugar print-token?)
-                         (guard (expect-sugar open-paren-token?) "open parenthesis")
-                         (guard parse-expression "an expression")
-                         (guard (expect-sugar close-paren-token?) "close parenthesis")))
+                         (guard parse-expression "an expression")))
    tokens))
 
 (define (parse/alt . parsers)
@@ -156,18 +108,6 @@
                   (match-parsers tokens* (rest parsers) (cons val vals))])]))
   (lambda (tokens)
     (match-parsers tokens parsers null)))
-
-(define (parse/kleene construct parser)
-  (define (match-parsers tokens parser vals)
-    (define-values (val tokens*) (parser tokens))
-    (cond [(not val)
-           (construct (reverse vals))]
-          [(eq? val 'ignore)
-           (match-parsers tokens* parser vals)]
-          [else
-           (match-parsers tokens* parser (cons val vals))]))
-  (lambda (tokens)
-    (match-parsers tokens parser null)))
 
 (define (guard parser message)
   (lambda (tokens)

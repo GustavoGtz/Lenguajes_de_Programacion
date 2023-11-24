@@ -1,0 +1,9 @@
+PARSERS PRIMITIVOS:
+	Son parsers muy basicos como el detectar un token.
+
+CONSTRUCTORES DE PARSERS:
+	Son constructores que le pasas un algo, y te construye un parser el cual, dicha funcion
+	abarca una familia de parsers.
+
+COMBINADORES DE PARSERS:
+	Combinan parsers para generar un parser nuevo.

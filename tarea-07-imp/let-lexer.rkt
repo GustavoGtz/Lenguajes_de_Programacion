@@ -39,13 +39,65 @@
     (stream-cons
      (pos-token (close-paren-token) start-pos end-pos)
      (lex-let input-port))]
+   ["minus"
+    (stream-cons
+     (pos-token (minus-token) start-pos end-pos)
+     (lex-let input-port))]
    ["zero?"
     (stream-cons
      (pos-token (zero?-token) start-pos end-pos)
      (lex-let input-port))]
+   ["equal?"
+    (stream-cons
+     (pos-token (equal?-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["greater?"
+    (stream-cons
+     (pos-token (greater?-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["less?"
+    (stream-cons
+     (pos-token (less?-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["null?"
+    (stream-cons
+     (pos-token (null?-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["cons"
+    (stream-cons
+     (pos-token (cons-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["car"
+    (stream-cons
+     (pos-token (car-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["cdr"
+    (stream-cons
+     (pos-token (cdr-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["emptylist"
+    (stream-cons
+     (pos-token (emptylist-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["list"
+    (stream-cons
+     (pos-token (list-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["+"
+    (stream-cons
+     (pos-token (sum-token) start-pos end-pos)
+     (lex-let input-port))]
    ["-"
     (stream-cons
      (pos-token (diff-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["*"
+    (stream-cons
+     (pos-token (mult-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["/"
+    (stream-cons
+     (pos-token (div-token) start-pos end-pos)
      (lex-let input-port))]
    [","
     (stream-cons

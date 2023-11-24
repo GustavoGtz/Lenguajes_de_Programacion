@@ -1,0 +1,43 @@
+#lang racket
+
+(require pict)
+
+; Parser primitivo:
+(define negro (disk 100) (list 255 255 255))
+(define blanco (disk 100) (list 255 255 255))
+
+; Constructor de colores (Constructor de Parsers)
+(define (disco r g b)
+  (colorize (disk 100) (list r g b)))
+
+(define (disco-gs l)
+  (disco l l l))
+
+(define (disco-pastel r g b)
+  (disco (min 255 (+ (* 2 r) 50))
+         (min 255 (+ (* 2 g) 50))
+         (min 255 (+ (* 2 b) 50)))) 
+
+(define (disco-aleatorio constructor)
+  (constructor (random 256)
+               (random 256)
+               (random 256)))
+
+; Combinador de parsers
+(define (color-medio color1 color2)
+  (list (min 255 (floor (/ (+ (first color1)
+                              (first color2))
+                           2)))
+        (min 255 (floor (/ (+ (second color1)
+                              (second color2))
+                           2)))
+        (min 255 (floor (/ (+ (second color1)
+                              (second color2))
+                           2)))))
+
+(define (disco-rojizo r g b)
+  (define color (color-medio (list r g b) (list 255 0 0)))
+  (disk (first color)
+        (second color)
+        (third color)))
+        

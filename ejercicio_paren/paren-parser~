@@ -1,0 +1,11 @@
+#lang racket
+
+
+
+(define (parser-open-paren tokens)
+  (cond
+    [(steam-empty? tokens) (values #f tokens)]
+    [(open-paren-token? (stream-first tokens)) (values 0 (stream-rest tokens))]))
+
+(define (parser-parens (stream-first))
+  

@@ -1,0 +1,49 @@
+#lang racket/base
+
+(require racket/list
+         racket/stream
+         racket/match
+         racket/function
+         "let-errors.rkt"
+         "let-locs.rkt"
+         "let-tokens.rkt"
+         "let-ast.rkt"
+         "let-lexer.rkt")
+
+(define (strip-pos token)
+  (match token
+    [(pos-token x _ _) x]
+    [_ token]))
+
+
+(define (tokenize input)
+  (map strip-pos
+       (stream->list
+        (lex-let (open-input-string input)))))
+
+
+
+(define (parser-open-paren tokens)
+  (cond
+    [(stream-empty? tokens) (values #f tokens)]
+    [(open-paren-token? (stream-first tokens)) (values 0 (stream-rest tokens))]))
+
+(define (parser-close-paren tokens)
+  (cond
+    [(stream-empty? tokens) (values #f tokens)]
+    [(close-paren-token? (stream-first tokens)) (values 1 (stream-rest tokens))]))
+
+(define (parser-paren tokens)
+  (define (parser-paren->binary-list vals tokens)
+    (cond
+      [(stream-empty? tokens) vals]
+      [(equal? #f )]
+    )
+  (parser-paren->binary-list null tokens)
+
+
+
+(define-values (x y) (parser-open-paren (tokenize "()()()")))
+
+
+  

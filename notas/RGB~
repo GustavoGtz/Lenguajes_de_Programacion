@@ -1,0 +1,6 @@
+#lang racket
+
+(requiere pict)
+
+(define (disco r g b)
+  (colorize (disk 100) (list r g b)))
