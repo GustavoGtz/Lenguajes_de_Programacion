@@ -110,6 +110,10 @@
                          (guard (expect-sugar close-paren-token?) "close parenthesis"))
               (parse/seq emptylist-exp
                          (expect-sugar emptylist-token?))
+              (parse/seq emptylist-exp
+                         (expect-sugar list-token?)
+                         (expect-sugar open-paren-token?)
+                         (expect-sugar close-paren-token?))
               (parse/seq list-exp
                          (expect-sugar list-token?)
                          (guard (expect-sugar open-paren-token?) "open parenthesis")
@@ -161,7 +165,7 @@
   (define (match-parsers tokens parser vals)
     (define-values (val tokens*) (parser tokens))
     (cond [(not val)
-           (construct (reverse vals))]
+           (values (construct (reverse vals)) tokens*)]
           [(eq? val 'ignore)
            (match-parsers tokens* parser vals)]
           [else

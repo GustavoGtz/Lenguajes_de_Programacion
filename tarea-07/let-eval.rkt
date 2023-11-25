@@ -69,7 +69,12 @@
     [(emptylist-exp)
      (null-val)]
     [(list-exp exps)
-     (num-val 1)]
+     (define (list-reader lst)
+       (if (equal? '() lst)
+           (null-val)
+           (let ([x (value-of (car lst) env)])
+             (pair-val (cons x (list-reader (cdr lst)))))))
+     (list-reader exps)]
     [(print-exp exp1)
      (printf "\"")
      (printval (value-of exp1 env))

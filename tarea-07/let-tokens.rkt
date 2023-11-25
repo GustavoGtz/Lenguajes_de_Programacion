@@ -24,6 +24,7 @@
 (struct cdr-token token () #:transparent)
 (struct emptylist-token token () #:transparent)
 (struct list-token token () #:transparent)
+(struct unpack-token token () #:transparent)
 (struct print-token token () #:transparent)
 
 
@@ -50,4 +51,5 @@
   [struct cdr-token ()]
   [struct emptylist-token ()]
   [struct list-token ()]
+  [struct unpack-token ()]
   [struct print-token ()]))

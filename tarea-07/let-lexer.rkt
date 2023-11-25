@@ -99,6 +99,10 @@
     (stream-cons
      (pos-token (list-token) start-pos end-pos)
      (lex-let input-port))]
+   ["unpack"
+    (stream-cons
+     (pos-token (unpack-token) start-pos end-pos)
+     (lex-let input-port))]
    ["print"
     (stream-cons
      (pos-token (print-token) start-pos end-pos)
