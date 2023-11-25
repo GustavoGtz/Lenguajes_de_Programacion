@@ -114,12 +114,12 @@
                          (expect-sugar list-token?)
                          (guard (expect-sugar open-paren-token?) "open parenthesis")
                          (parse/alt
-                          (expect-sugar close-paren-token? "close parenthesis")
+                          (expect-sugar close-paren-token?)
                           (parse/seq cons
                                      (guard parse-expression "some expressions")
                                      (parse/kleene identity
                                                    (parse/seq identity
-                                                              (guard (expect-sugar comma-token?) "a comma")
+                                                              (expect-sugar comma-token?)
                                                               (guard parse-expression "some expressions")))
                                      (guard (expect-sugar close-paren-token?) "close parenthesis"))))
               (parse/seq print-exp
