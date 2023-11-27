@@ -126,6 +126,15 @@
                                                               (expect-sugar comma-token?)
                                                               (guard parse-expression "some expressions")))
                                      (guard (expect-sugar close-paren-token?) "close parenthesis"))))
+              (parse/seq unpack-exp
+                         (expect-sugar unpack-token?)
+                         (parse/kleene identity
+                                       (parse/seq identity
+                                                  (expect-some id-token? id-token-name)))
+                         (guard (expect-sugar equals-token?) "binding operator")
+                         (guard parse-expression "an expression")
+                         (guard (expect-sugar in-token?) "in keyword")
+                         (guard parse-expression "an expression"))
               (parse/seq print-exp
                          (expect-sugar print-token?)
                          (guard (expect-sugar open-paren-token?) "open parenthesis")

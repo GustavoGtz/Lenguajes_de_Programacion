@@ -75,6 +75,23 @@
            (let ([x (value-of (car lst) env)])
              (pair-val (cons x (list-reader (cdr lst)))))))
      (list-reader exps)]
+    [(unpack-exp ids exp1 exp2)
+     (define (aux-value-of idlst explst exp env)
+       (if (null? idlst)
+           (if (null-val? explst)
+               (value-of exp env)
+               (error (format "The number of elements in the list does not match the required")))
+           (if (null-val? explst)
+               (error (format "The number of elements in the list does not match the required"))
+               (let [(id (car idlst))
+                     (val (car (pair-val-x explst)))
+                     (expsrst (cdr (pair-val-x explst)))]
+                 (aux-value-of (cdr idlst) expsrst exp (extend-env id val env))))))
+     (let ([expslst (value-of exp1 env)])
+       (if (or (null-val? expslst) (pair-val? expslst))
+           (aux-value-of ids expslst exp2 env)
+           (error (format "Expected a list but got something else"))))
+     ]
     [(print-exp exp1)
      (printf "\"")
      (printval (value-of exp1 env))
