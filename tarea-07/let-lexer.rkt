@@ -18,7 +18,7 @@
   (:: (:? (:or "+" "-")) (:+ digit)))
 
 (define-lex-abbrev id-re
-  (:: (:or alphabetic "+" "-" "/" "*" "?" "=" "," "(" ")") (:* (:or "+" "-" "/" "*" "?" "=" "," "(" ")" alphabetic digit))))
+  (:: (:or alphabetic "-" "+" "*") (:* (:or alphabetic digit "?"))))
 
 (define (make-int-token lexeme)
   (int-token (string->number lexeme)))
@@ -31,6 +31,82 @@
    [(eof) empty-stream]
    [whitespace (lex-let input-port)]
    [comment-re (lex-let input-port)]
+   ["("
+    (stream-cons
+     (pos-token (open-paren-token) start-pos end-pos)
+     (lex-let input-port))]
+   [")"
+    (stream-cons
+     (pos-token (close-paren-token) start-pos end-pos)
+     (lex-let input-port))]
+;   ["zero?"
+;    (stream-cons
+;     (pos-token (zero?-token) start-pos end-pos)
+;     (lex-let input-port))]
+;   ["-"
+;    (stream-cons
+;     (pos-token (diff-token) start-pos end-pos)
+;     (lex-let input-port))]
+   [","
+    (stream-cons
+     (pos-token (comma-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["if"
+    (stream-cons
+     (pos-token (if-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["then"
+    (stream-cons
+     (pos-token (then-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["else"
+    (stream-cons
+     (pos-token (else-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["let"
+    (stream-cons
+     (pos-token (let-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["="
+    (stream-cons
+     (pos-token (equals-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["in"
+    (stream-cons
+     (pos-token (in-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["null?"
+    (stream-cons
+     (pos-token (null?-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["cons"
+    (stream-cons
+     (pos-token (cons-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["car"
+    (stream-cons
+     (pos-token (car-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["cdr"
+    (stream-cons
+     (pos-token (cdr-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["emptylist"
+    (stream-cons
+     (pos-token (emptylist-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["list"
+    (stream-cons
+     (pos-token (list-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["unpack"
+    (stream-cons
+     (pos-token (unpack-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["print"
+    (stream-cons
+     (pos-token (print-token) start-pos end-pos)
+     (lex-let input-port))]
    [int-re
     (stream-cons
      (pos-token (make-int-token lexeme) start-pos end-pos)

@@ -35,17 +35,25 @@
      (printf " . ")
      (printval val)]))
 
+; returns a pair: car = function, cdr = No. Args
+(define (op-table id)
+  (match id
+    ['- (cons (lambda (x y) (num-val (- (expval->num x) (expval->num y)))) 2)]
+    ['+ (cons (lambda (x y) (num-val (+ (expval->num x) (expval->num y)))) 2)]
+    ['* (cons (lambda (x y) (num-val (* (expval->num x) (expval->num y)))) 2)]
+    ['zero? (cons (lambda (x) (bool-val (zero? (expval->num x)))) 1)]))
+
 (define (value-of exp env)
   (match exp
     [(const-exp num)
      (num-val num)]
     [(var-exp var)
      (apply-env env var)]
-    [(diff-exp exp1 exp2)
-     (num-val (- (expval->num (value-of exp1 env))
-                 (expval->num (value-of exp2 env))))]
-    [(zero?-exp exp1)
-     (bool-val (zero? (expval->num (value-of exp1 env))))]
+;    [(diff-exp exp1 exp2)
+;     (num-val (- (expval->num (value-of exp1 env))
+;                 (expval->num (value-of exp2 env))))]
+;    [(zero?-exp exp1)
+;     (bool-val (zero? (expval->num (value-of exp1 env))))]
     [(if-exp exp1 exp2 exp3)
      (if (expval->bool (value-of exp1 env))
          (value-of exp2 env)
@@ -97,6 +105,14 @@
      (printval (value-of exp1 env))
      (printf "\"\n")
      (num-val 1)]
+    [(opcall-exp op args)
+     (let* ([matching-op (op-table op)]
+            [func (car matching-op)]
+            [min-args (cdr matching-op)]
+            [eval-args (map (lambda (y) (value-of y env)) args)])
+       (if (equal? (length args) min-args)
+           (apply func eval-args)
+           (error (format "The number of elements arguments does not match the required"))))]
     [_
      (error (format "Expected expression but got ~a" exp))]))
 

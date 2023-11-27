@@ -407,12 +407,8 @@
     \\
     \hspace*{10mm}
         $\frac
-        {\mathcal{E}(exp_1,\rho)=val_1\hspace{1mm}\mathcal{E}(body,\rho)=val}
-        {\mathcal{E}(\text{unpack}(()\ exp_1\ body),\rho)=val}$
-    \hspace*{10mm}
-        $\frac
-        {}
-        {\mathcal{H}(\text{list}(x_1\ x\ ...),\ pair(val_0,rest),body,\rho)=\mathcal{H}(\text{list}(x\ ...),rest,body,[x_1=val_0]\rho)}$\\
+        {exp_1=pair(val_0,rest)}
+        {\mathcal{H}(\text{list}(x_1\ x\ ...),\ exp_1,body,\rho)=\mathcal{H}(\text{list}(x\ ...),rest,body,[x_1=val_0]\rho)}$\\
     \\
     \hspace*{10mm}
         $\frac

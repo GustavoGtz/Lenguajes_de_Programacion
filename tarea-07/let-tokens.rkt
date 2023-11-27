@@ -9,8 +9,8 @@
 (struct id-token token (name) #:transparent)
 (struct open-paren-token token () #:transparent)
 (struct close-paren-token token () #:transparent)
-(struct zero?-token token () #:transparent)
-(struct diff-token token () #:transparent)
+;(struct zero?-token token () #:transparent)
+;(struct diff-token token () #:transparent)
 (struct comma-token token () #:transparent)
 (struct if-token token () #:transparent)
 (struct then-token token () #:transparent)
@@ -36,8 +36,8 @@
   [struct id-token ((name symbol?))]
   [struct open-paren-token ()]
   [struct close-paren-token ()]
-  [struct zero?-token ()]
-  [struct diff-token ()]
+  ;[struct zero?-token ()]
+  ;[struct diff-token ()]
   [struct comma-token ()]
   [struct if-token ()]
   [struct then-token ()]
