@@ -6,12 +6,10 @@
          "let-lexer.rkt"
          "let-parser.rkt"
          "let-vals.rkt"
-         "let-eval.rkt"
-         "let-compile.rkt")
+         "let-eval.rkt")
 
 (define interpret
   (compose value-of-program
-           compile-program
            parse-let
            lex-let))
 

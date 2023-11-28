@@ -49,17 +49,18 @@
      (num-val num)]
     [(var-exp var)
      (apply-env env var)]
-;    [(diff-exp exp1 exp2)
-;     (num-val (- (expval->num (value-of exp1 env))
-;                 (expval->num (value-of exp2 env))))]
-;    [(zero?-exp exp1)
-;     (bool-val (zero? (expval->num (value-of exp1 env))))]
     [(if-exp exp1 exp2 exp3)
-     (if (expval->bool (value-of exp1 env))
-         (value-of exp2 env)
-         (value-of exp3 env))]
-    [(let-exp var exp1 body)
-     (value-of body (extend-env var (value-of exp1 env) env))]
+     (if (emptylist-exp? exp1)
+         (error (format "Null predicate"))
+         (if (expval->bool (value-of exp1 env))
+             (value-of exp2 env)
+             (value-of exp3 env)))]
+    [(let-exp bindings body)
+     (display body)
+     (newline)
+     (if (null? bindings)
+         (value-of body env)
+         (value-of body (extend-env (car bindings) (value-of (cdr bindings) env) env)))]
     [(null?-exp exp1)
      (bool-val (equal? (value-of exp1 env) null-val))]
     [(cons-exp exp1 exp2)
@@ -77,6 +78,8 @@
     [(emptylist-exp)
      (null-val)]
     [(list-exp exps)
+     (print exps)
+     (newline)
      (define (list-reader lst)
        (if (equal? '() lst)
            (null-val)

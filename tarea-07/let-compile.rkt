@@ -1,0 +1,66 @@
+#lang racket/base
+
+(require racket/list
+         racket/stream
+         racket/match
+         racket/function
+         "let-errors.rkt"
+         "let-locs.rkt"
+         "let-tokens.rkt"
+         "let-ast.rkt")
+
+(define (compile exp)
+  (match exp
+    [(const-exp num) (const-exp num)]
+    [(opcall-exp op args)
+     (define (compile-args lst)
+       (if (null? lst)
+           '()
+           (cons (compile (first lst)) (compile-args (rest lst)))))
+     (opcall-exp op (compile-args args))]
+    [(if-exp exp1 exp2 exp3) (if-exp (compile exp1) (compile exp2) (compile exp3))]
+    [(var-exp var) (var-exp var)]
+    [(unpack-exp ids exp body) (unpack-exp ids (compile exp) (compile body))]
+    [(let-exp bindings body)
+     (define (get-vars bindings)
+       (if (null? bindings)
+           '()
+           (cons (car(car bindings)) (get-vars (cdr bindings)))))
+     (define (get-vals bindings)
+       (if (null? bindings)
+           (emptylist-exp)
+           (cons-exp (compile (cdr(car bindings))) (get-vals (cdr bindings)))))
+     (unpack-exp (get-vars bindings) (get-vals bindings) (compile body))]
+    [(let*-exp bindings body)
+     (if (null? bindings)
+         (compile (let-exp '() body))
+         (compile (let-exp (list (car bindings)) (compile (let*-exp (cdr bindings) body)))))]
+    [(null?-exp exp) (null?-exp (compile exp))]
+    [(emptylist-exp) (emptylist-exp)]
+    [(cons-exp exp1 exp2) (cons-exp (compile exp1) (compile exp2))]
+    [(car-exp exp) (car-exp (compile exp))]
+    [(cdr-exp exp) (cdr-exp (compile exp))]
+    [(list-exp exps)
+     (define (aux-list exps)
+       (if (null? exps)
+           null
+           (let ([val1 (compile (car exps))])
+             (cons val1 (aux-list (cdr exps))))))
+     (if (null? exps)
+         (emptylist-exp)
+         (list-exp (aux-list exps)))]
+    [(cond-exp clauses)
+     (if (null? clauses)
+         (if-exp (emptylist-exp) (emptylist-exp) (emptylist-exp)) ;error
+         (let* ([clause (car clauses)]
+                [predicate (car clause)]
+                [result (cdr clause)])
+                (if-exp predicate result
+                        (compile (cond-exp (rest clauses))))))]))
+
+(define (compile-program pgm)
+  (match pgm
+    [(a-program exp1)
+    (a-program (compile exp1))]))
+
+(provide compile-program)

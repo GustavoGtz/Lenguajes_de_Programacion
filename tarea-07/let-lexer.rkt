@@ -39,14 +39,6 @@
     (stream-cons
      (pos-token (close-paren-token) start-pos end-pos)
      (lex-let input-port))]
-;   ["zero?"
-;    (stream-cons
-;     (pos-token (zero?-token) start-pos end-pos)
-;     (lex-let input-port))]
-;   ["-"
-;    (stream-cons
-;     (pos-token (diff-token) start-pos end-pos)
-;     (lex-let input-port))]
    [","
     (stream-cons
      (pos-token (comma-token) start-pos end-pos)
@@ -102,6 +94,22 @@
    ["unpack"
     (stream-cons
      (pos-token (unpack-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["cond"
+    (stream-cons
+     (pos-token (cond-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["=>"
+    (stream-cons
+     (pos-token (right-arrow-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["end"
+    (stream-cons
+     (pos-token (end-token) start-pos end-pos)
+     (lex-let input-port))]
+   ["let*"
+    (stream-cons
+     (pos-token (let*-token) start-pos end-pos)
      (lex-let input-port))]
    ["print"
     (stream-cons
